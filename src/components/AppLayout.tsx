@@ -269,11 +269,14 @@ function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                <span className="text-blue-200 text-sm">Henveiru, Male'<br />Republic of Maldives</span>
+                <span className="text-blue-200 text-sm">125 Kaneeru Magu, Hithadhoo, Addu City, Maldives</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                <a href="tel:+9603312345" className="text-blue-200 hover:text-white text-sm transition-colors">+960 331 2345</a>
+                <span className="flex flex-col">
+                  <a href="tel:+9607333880" className="text-blue-200 hover:text-white text-sm transition-colors">7333880</a>
+                  <a href="tel:+9607483338" className="text-blue-200 hover:text-white text-sm transition-colors">7483338</a>
+                </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-amber-400 flex-shrink-0" />
@@ -871,8 +874,8 @@ function ContactSection() {
   };
 
   const contactInfo = [
-    { icon: MapPin, title: 'Visit Us', details: ["Henveiru, Male'", 'Republic of Maldives'] },
-    { icon: Phone, title: 'Call Us', details: ['+960 331 2345', '+960 331 2346'] },
+    { icon: MapPin, title: 'Visit Us', details: ['125 Kaneeru Magu, Hithadhoo, Addu City, Maldives'] },
+    { icon: Phone, title: 'Call Us', details: ['7333880', '7483338'] },
     { icon: Mail, title: 'Email Us', details: ['info@eihe.edu.mv', 'admissions@eihe.edu.mv'] },
     { icon: Clock, title: 'Office Hours', details: ['Sunday - Thursday', '8:00 AM - 5:00 PM'] }
   ];
@@ -896,7 +899,13 @@ function ContactSection() {
                 <info.icon className="w-6 h-6 text-amber-400" />
               </div>
               <h3 className="font-semibold text-blue-900 mb-2">{info.title}</h3>
-              {info.details.map((detail, i) => (<p key={i} className="text-gray-600 text-sm">{detail}</p>))}
+              {info.details.map((detail, i) => (
+                info.title === 'Call Us' ? (
+                  <a key={i} href={i === 0 ? 'tel:+9607333880' : 'tel:+9607483338'} className="block text-gray-600 hover:text-blue-900 text-sm transition-colors">{detail}</a>
+                ) : (
+                  <p key={i} className="text-gray-600 text-sm">{detail}</p>
+                )
+              ))}
             </div>
           ))}
         </div>
@@ -932,7 +941,7 @@ function ContactSection() {
           <div>
             <h3 className="text-2xl font-bold text-blue-900 mb-6">Find Us</h3>
             <div className="bg-gray-100 rounded-xl overflow-hidden h-[400px]">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31915.19626459!2d73.49!3d4.175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b3f7e5c5b5b5b5b%3A0x3b3f7e5c5b5b5b5b!2sMale%2C%20Maldives!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" title="EIHE Location"></iframe>
+              <iframe src="https://www.google.com/maps?q=125%20Kaneeru%20Magu%2C%20Hithadhoo%2C%20Addu%20City%2C%20Maldives&output=embed" width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" title="EIHE Location"></iframe>
             </div>
           </div>
         </div>

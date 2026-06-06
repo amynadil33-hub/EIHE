@@ -280,7 +280,7 @@ function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                <a href="mailto:info@eihe.edu.mv" className="text-blue-200 hover:text-white text-sm transition-colors">info@eihe.edu.mv</a>
+                <a href="mailto:eihe@everyones.com.mv" className="text-blue-200 hover:text-white text-sm transition-colors">eihe@everyones.com.mv</a>
               </li>
             </ul>
             <div className="mt-6 p-4 bg-blue-800/30 rounded-lg">
@@ -883,7 +883,7 @@ function ApplySection() {
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
               <h3 className="text-2xl font-bold text-blue-900 mb-4">Payment Slip Submitted!</h3>
-              <p className="text-gray-600 mb-6">Your application and payment slip for <strong>{selectedCourse?.course_name}</strong> have been submitted.</p>
+              <p className="text-gray-600 mb-6">Your application and payment slip for the selected course have been submitted.</p>
               <div className="bg-blue-50 rounded-lg p-6 mb-6 text-left">
                 <h4 className="font-semibold text-blue-900 mb-3">What's Next?</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
@@ -928,7 +928,7 @@ function ContactSection() {
   const contactInfo = [
     { icon: MapPin, title: 'Visit Us', details: ['125 Kaneeru Magu, Hithadhoo, Addu City, Maldives'] },
     { icon: Phone, title: 'Call Us', details: ['7333880', '7483338'] },
-    { icon: Mail, title: 'Email Us', details: ['info@eihe.edu.mv', 'admissions@eihe.edu.mv'] },
+    { icon: Mail, title: 'Email Us', details: ['eihe@everyones.com.mv'] },
     { icon: Clock, title: 'Office Hours', details: ['Sunday - Thursday', '8:00 AM - 5:00 PM'] }
   ];
 

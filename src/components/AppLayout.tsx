@@ -833,8 +833,8 @@ function ApplySection() {
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Enrollment Complete!</h3>
-              <p className="text-gray-600 mb-6">Congratulations! You have been successfully enrolled in <strong>{selectedCourse?.course_name}</strong>.</p>
+              <h3 className="text-2xl font-bold text-blue-900 mb-4">Payment Slip Submitted!</h3>
+              <p className="text-gray-600 mb-6">Your application and payment slip for the selected course have been submitted.</p>
               <div className="bg-blue-50 rounded-lg p-6 mb-6 text-left">
                 <h4 className="font-semibold text-blue-900 mb-3">What's Next?</h4>
                 <ul className="space-y-2 text-sm text-gray-600">

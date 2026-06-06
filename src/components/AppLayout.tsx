@@ -134,7 +134,7 @@ function Header() {
               <>
                 <button onClick={() => scrollToSection('#portal')} className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-50 rounded-lg transition-colors">
                   <User className="w-4 h-4" />
-                  <span>Student Portal</span>
+                  <span>Lifelong Learning Portal</span>
                 </button>
                 <button onClick={handleLogout} className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
                   <LogOut className="w-4 h-4" />
@@ -144,7 +144,7 @@ function Header() {
             ) : (
               <button onClick={() => scrollToSection('#login')} className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-blue-900 to-blue-700 text-white text-sm font-medium rounded-lg hover:from-blue-800 hover:to-blue-600 transition-all shadow-md hover:shadow-lg">
                 <User className="w-4 h-4" />
-                <span>Student Portal</span>
+                <span>Lifelong Learning Portal</span>
               </button>
             )}
           </div>
@@ -167,7 +167,7 @@ function Header() {
                   <>
                     <button onClick={() => scrollToSection('#portal')} className="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-blue-900 hover:bg-blue-50 rounded-lg w-full">
                       <User className="w-4 h-4" />
-                      <span>Student Portal</span>
+                      <span>Lifelong Learning Portal</span>
                     </button>
                     <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg w-full">
                       <LogOut className="w-4 h-4" />
@@ -177,7 +177,7 @@ function Header() {
                 ) : (
                   <button onClick={() => scrollToSection('#login')} className="flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white text-sm font-medium rounded-lg w-full">
                     <User className="w-4 h-4" />
-                    <span>Student Portal</span>
+                    <span>Lifelong Learning Portal</span>
                   </button>
                 )}
               </div>
@@ -196,7 +196,7 @@ function Footer() {
     { name: 'Courses', hash: '#courses' },
     { name: 'Apply Now', hash: '#apply' },
     { name: 'Contact Us', hash: '#contact' },
-    { name: 'Student Portal', hash: '#portal' },
+    { name: 'Lifelong Learning Portal', hash: '#portal' },
   ];
 
   const programs = ['English Language', 'Business Administration', 'Information Technology', 'Hospitality Management', 'Healthcare Administration', 'Project Management'];
@@ -344,6 +344,9 @@ function HeroSection() {
             <button onClick={() => document.querySelector('#apply')?.scrollIntoView({ behavior: 'smooth' })} className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all">
               Apply Now
             </button>
+            <a href="https://linktr.ee/eiheonline" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+              Join Live Class
+            </a>
           </div>
         </div>
       </div>
@@ -836,13 +839,13 @@ function ApplySection() {
                 <h4 className="font-semibold text-blue-900 mb-3">What's Next?</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Your student account has been created</li>
-                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />You can now access your Student Portal</li>
+                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />You can now access your Lifelong Learning Portal</li>
                   <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Course materials will be available in your portal</li>
                 </ul>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button onClick={() => document.querySelector('#portal')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white font-semibold rounded-lg flex items-center justify-center">
-                  Go to Student Portal<ArrowRight className="w-5 h-5 ml-2" />
+                  Go to Lifelong Learning Portal<ArrowRight className="w-5 h-5 ml-2" />
                 </button>
                 <button onClick={() => { setStep(1); setFormData({ fullName: '', email: '', phone: '', address: '', courseId: '' }); setSelectedCourse(null); }} className="px-8 py-3 border border-gray-200 text-gray-700 font-medium rounded-lg">
                   Apply for Another Course
@@ -950,7 +953,7 @@ function ContactSection() {
   );
 }
 
-// Student Portal Section
+// Lifelong Learning Portal Section
 function StudentPortalSection() {
   const [user, setUser] = useState<any>(null);
   const [student, setStudent] = useState<Student | null>(null);
@@ -1048,7 +1051,7 @@ function StudentPortalSection() {
             <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center mx-auto mb-4">
               <GraduationCap className="w-9 h-9 text-amber-400" />
             </div>
-            <h2 className="text-2xl font-bold text-blue-900">Student Portal</h2>
+            <h2 className="text-2xl font-bold text-blue-900">Lifelong Learning Portal</h2>
             <p className="text-gray-600 mt-1">Everyone's Institute of Higher Education</p>
           </div>
           <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -1091,7 +1094,7 @@ function StudentPortalSection() {
           <div className="text-center py-16">
             <GraduationCap className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-700 mb-2">No Student Profile Found</h2>
-            <p className="text-gray-500 mb-6">You need to enroll in a course to access the student portal.</p>
+            <p className="text-gray-500 mb-6">You need to enroll in a course to access the lifelong learning portal.</p>
             <button onClick={() => document.querySelector('#apply')?.scrollIntoView({ behavior: 'smooth' })} className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white font-semibold rounded-lg">
               Apply for a Course<ChevronRight className="w-5 h-5 ml-2" />
             </button>
@@ -1101,7 +1104,7 @@ function StudentPortalSection() {
     );
   }
 
-  // Student Portal Dashboard
+  // Lifelong Learning Portal Dashboard
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
     { id: 'courses', label: 'My Courses', icon: BookOpen },

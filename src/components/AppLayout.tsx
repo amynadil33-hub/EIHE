@@ -280,7 +280,7 @@ function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                <a href="mailto:info@eihe.edu.mv" className="text-blue-200 hover:text-white text-sm transition-colors">info@eihe.edu.mv</a>
+                <a href="mailto:eihe@everyones.com.mv" className="text-blue-200 hover:text-white text-sm transition-colors">eihe@everyones.com.mv</a>
               </li>
             </ul>
             <div className="mt-6 p-4 bg-blue-800/30 rounded-lg">
@@ -879,7 +879,7 @@ function ContactSection() {
   const contactInfo = [
     { icon: MapPin, title: 'Visit Us', details: ['125 Kaneeru Magu, Hithadhoo, Addu City, Maldives'] },
     { icon: Phone, title: 'Call Us', details: ['7333880', '7483338'] },
-    { icon: Mail, title: 'Email Us', details: ['info@eihe.edu.mv', 'admissions@eihe.edu.mv'] },
+    { icon: Mail, title: 'Email Us', details: ['eihe@everyones.com.mv'] },
     { icon: Clock, title: 'Office Hours', details: ['Sunday - Thursday', '8:00 AM - 5:00 PM'] }
   ];
 

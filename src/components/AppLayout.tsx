@@ -887,24 +887,14 @@ function ApplySection() {
               <div className="bg-blue-50 rounded-lg p-6 mb-6 text-left">
                 <h4 className="font-semibold text-blue-900 mb-3">What's Next?</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
-<<<<<<< HEAD
                   <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />EIHE has received your application and payment slip</li>
                   <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />EIHE will verify your payment and contact you</li>
-                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Course materials will be activated after verification</li>
-=======
-                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Your student account has been created</li>
-                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />You can now access your Lifelong Learning Portal</li>
-                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Course materials will be available in your portal</li>
->>>>>>> 355b33cf0e54558173e039b33c37d04e8d1d3000
+                  <li className="flex items-start"><CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />Course materials will be activated in your Lifelong Learning Portal after verification</li>
                 </ul>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button onClick={() => document.querySelector('#portal')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white font-semibold rounded-lg flex items-center justify-center">
-<<<<<<< HEAD
-                  Student Portal<ArrowRight className="w-5 h-5 ml-2" />
-=======
                   Go to Lifelong Learning Portal<ArrowRight className="w-5 h-5 ml-2" />
->>>>>>> 355b33cf0e54558173e039b33c37d04e8d1d3000
                 </button>
                 <button onClick={() => { setStep(1); setFormData({ fullName: '', email: '', phone: '', address: '', courseId: '' }); setSelectedCourse(null); setPaymentSlip(null); }} className="px-8 py-3 border border-gray-200 text-gray-700 font-medium rounded-lg">
                   Apply for Another Course

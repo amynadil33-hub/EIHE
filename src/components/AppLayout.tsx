@@ -574,6 +574,7 @@ function ApplySection() {
   const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', address: '', courseId: '' });
   const [authMode, setAuthMode] = useState<'login' | 'register'>('register');
   const [authData, setAuthData] = useState({ email: '', password: '', confirmPassword: '' });
+  const [paymentSlip, setPaymentSlip] = useState<File | null>(null);
 
   useEffect(() => {
     fetchCourses();
@@ -640,8 +641,34 @@ function ApplySection() {
   };
 
   const handlePayment = async () => {
-    if (!selectedCourse || !applicationId || !user) return;
+    if (!selectedCourse || !applicationId || !user) {
+      toast.error('Missing application or login details');
+      return;
+    }
+
+    if (!paymentSlip) {
+      toast.error('Please upload your payment slip');
+      return;
+    }
+
     setSubmitting(true);
+
+    const fileExt = paymentSlip.name.split('.').pop();
+    const fileName = `${user.id}-${applicationId}-${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('payment-slips')
+      .upload(fileName, paymentSlip);
+
+    if (uploadError) {
+      toast.error('Failed to upload payment slip');
+      setSubmitting(false);
+      return;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from('payment-slips')
+      .getPublicUrl(fileName);
     
     const { data: studentData, error: studentError } = await supabase.from('students').insert({
       user_id: user.id, full_name: formData.fullName, email: formData.email,
@@ -656,15 +683,26 @@ function ApplySection() {
       student = existing;
     }
 
-    await supabase.from('payments').insert({
-      student_id: student?.id, application_id: applicationId, course_id: selectedCourse.id,
-      amount: selectedCourse.fee, status: 'completed', payment_method: 'card', payment_ref: `PAY-${Date.now()}`
+    const { error: paymentError } = await supabase.from('payments').insert({
+      student_id: student?.id,
+      application_id: applicationId,
+      course_id: selectedCourse.id,
+      amount: selectedCourse.fee,
+      status: 'pending_verification',
+      payment_method: 'bank_transfer',
+      slip_url: publicUrlData.publicUrl,
+      payment_ref: `SLIP-${Date.now()}`
     });
 
-    await supabase.from('enrollments').insert({ student_id: student?.id, course_id: selectedCourse.id, status: 'active' });
-    await supabase.from('applications').update({ status: 'approved' }).eq('id', applicationId);
+    if (paymentError) {
+      toast.error('Failed to submit payment slip');
+      setSubmitting(false);
+      return;
+    }
 
-    toast.success('Payment successful! You are now enrolled.');
+    await supabase.from('applications').update({ status: 'payment_submitted' }).eq('id', applicationId);
+
+    toast.success('Payment slip submitted. EIHE will verify and contact you.');
     setStep(4);
     setSubmitting(false);
   };
@@ -800,28 +838,39 @@ function ApplySection() {
                   </div>
                 </div>
               </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h4 className="font-semibold text-blue-900 mb-2">Bank Transfer Details</h4>
+                <p className="text-sm text-gray-700">Please transfer the course fee and upload your payment slip below.</p>
+                <p className="text-sm text-gray-700 mt-2"><strong>BML Account No:</strong> 7730000203541</p>
+                <p className="text-sm text-gray-700"><strong>Account Name:</strong> Everyone's Institute of Higher Education (EIHE)</p>
+                <p className="text-sm text-gray-700"><strong>Contact:</strong> 7333880</p>
+              </div>
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
                 <div className="flex items-start">
                   <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" />
                   <div>
-                    <h4 className="font-medium text-amber-800">Payment Gateway</h4>
-                    <p className="text-sm text-amber-700 mt-1">This is a demo payment. In production, you will be redirected to BML Payment Gateway.</p>
+                    <h4 className="font-medium text-amber-800">Verification Required</h4>
+                    <p className="text-sm text-amber-700 mt-1">After you submit your payment slip, EIHE will verify your payment and contact you. Course portal access will be activated only after EIHE confirms the payment.</p>
                   </div>
                 </div>
               </div>
-              <div className="space-y-4 mb-6">
-                <div><label className="block text-sm font-medium text-gray-700 mb-2">Card Number</label><input type="text" placeholder="4242 4242 4242 4242" className="w-full px-4 py-3 border border-gray-200 rounded-lg" /></div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div><label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label><input type="text" placeholder="MM/YY" className="w-full px-4 py-3 border border-gray-200 rounded-lg" /></div>
-                  <div><label className="block text-sm font-medium text-gray-700 mb-2">CVV</label><input type="text" placeholder="123" className="w-full px-4 py-3 border border-gray-200 rounded-lg" /></div>
-                </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Upload Payment Slip *</label>
+                <input
+                  type="file"
+                  accept="image/*,.pdf"
+                  onChange={(e) => setPaymentSlip(e.target.files?.[0] || null)}
+                  required
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg"
+                />
+                {paymentSlip && <p className="text-sm text-green-700 mt-2">Selected: {paymentSlip.name}</p>}
               </div>
               <div className="flex gap-4">
                 <button type="button" onClick={() => setStep(2)} className="px-6 py-3 border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 flex items-center">
                   <ArrowLeft className="w-5 h-5 mr-2" />Back
                 </button>
                 <button onClick={handlePayment} disabled={submitting} className="flex-1 py-3 bg-gradient-to-r from-amber-500 to-amber-400 text-blue-900 font-semibold rounded-lg disabled:opacity-50 flex items-center justify-center">
-                  {submitting ? 'Processing...' : `Pay MVR ${selectedCourse.fee.toLocaleString()}`}
+                  {submitting ? 'Submitting...' : 'Submit Payment Slip'}
                   <CreditCard className="w-5 h-5 ml-2" />
                 </button>
               </div>
@@ -847,7 +896,7 @@ function ApplySection() {
                 <button onClick={() => document.querySelector('#portal')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white font-semibold rounded-lg flex items-center justify-center">
                   Go to Lifelong Learning Portal<ArrowRight className="w-5 h-5 ml-2" />
                 </button>
-                <button onClick={() => { setStep(1); setFormData({ fullName: '', email: '', phone: '', address: '', courseId: '' }); setSelectedCourse(null); }} className="px-8 py-3 border border-gray-200 text-gray-700 font-medium rounded-lg">
+                <button onClick={() => { setStep(1); setFormData({ fullName: '', email: '', phone: '', address: '', courseId: '' }); setSelectedCourse(null); setPaymentSlip(null); }} className="px-8 py-3 border border-gray-200 text-gray-700 font-medium rounded-lg">
                   Apply for Another Course
                 </button>
               </div>
@@ -953,7 +1002,7 @@ function ContactSection() {
   );
 }
 
-// Student Portal Section
+// Lifelong Learning Portal Section
 function StudentPortalSection() {
   const [user, setUser] = useState<any>(null);
   const [student, setStudent] = useState<Student | null>(null);
@@ -1104,7 +1153,7 @@ function StudentPortalSection() {
     );
   }
 
-  // Student Portal Dashboard
+  // Lifelong Learning Portal Dashboard
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
     { id: 'courses', label: 'My Courses', icon: BookOpen },

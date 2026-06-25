@@ -1347,7 +1347,7 @@ function TestimonialsSection() {
   const testimonials = [
     { name: 'Ahmed Hassan', role: 'Business Administration Graduate', image: TESTIMONIAL_IMAGES[0], quote: 'EIHE transformed my career. The practical knowledge I gained helped me secure a management position within months of graduating.' },
     { name: 'Fathimath Ali', role: 'IT Certificate Graduate', image: TESTIMONIAL_IMAGES[1], quote: 'The supportive environment and quality education at EIHE gave me the confidence to pursue my dreams in technology.' },
-    { name: 'Ibrahim Mohamed', role: 'Hospitality Management Student', image: TESTIMONIAL_IMAGES[2], quote: 'The hands-on approach and industry connections have been invaluable for my career in the tourism sector.' },
+    { name: 'Aishath Ali', role: 'Hospitality Management Student', image: TESTIMONIAL_IMAGES[2], quote: 'The hands-on approach and industry connections have been invaluable for my career in the tourism sector.' },
   ];
 
   return (
